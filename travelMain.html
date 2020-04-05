@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en" style="height:100%;">
+  <head>
+    <script>
+      sessionStorage.clear();
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/w6jOYkH.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Travel Insurance</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1b8a27bdd5.js" crossorigin="anonymous"></script>
+	<style type="text/css">
+		.round-border {
+			border-right: 1px solid red;
+			border-bottom: 1px solid red; 
+			border-left: 1px solid red;
+			box-shadow: 5px 10px #888888;
+		}
+		#nav-tr{
+			cursor: pointer;
+		}
+		.chosen-tab {
+			background-color: white;
+			border-top: 1px solid red;
+			border-left: 1px solid red;
+			border-right: 1px solid red;
+		}
+		.off-tab {
+			background-color: #193b6b;
+			color: white; 
+		}
+		.modal-header {
+			background-color: #193b6b;
+			color: white;
+		}
+		#startList {
+		  /* Remove default list styling */
+		  list-style-type: none;
+		  padding: 0;
+		  margin: 0;
+		}
+		#startList li a {
+		  text-align: left;
+		  border: 1px solid #ddd; /* Add a border to all links */
+		  background-color: #f6f6f6; /* Grey background color */
+		  padding: 10px; /* Add some padding */
+		  text-decoration: none; /* Remove default text underline */
+		  font-size: 18px; /* Increase the font-size */
+		  color: black; /* Add a black text color */
+		  display: block; /* Make it into a block element to fill the whole list */
+		}
+
+		#startList li a:hover:not(.header) {
+		  background-color: #eee; /* Add a hover effect to all links, except for headers */
+		}
+		ul {
+			height: 400px;
+			overflow: auto;
+		}
+	</style>
+  </head>
+  <body style="background-color: #efefef; height: 100%;">
+  	<div class="container-fluid">
+		<!--<div class="row justify-content-md-center">
+			<div class="col-sm-4 text-center">
+				<img src="/images/blife.png" style="height: 100px">
+			</div>
+		</div>-->
+			<div class="offset-sm-4 col-sm-4">
+				<p class="h3 text-center" style="margin-top: 5px; color: #193b6b">Travel Insurance<br><small>Insured Details</small>
+				</p>
+				<form style="margin: 0 auto;">
+					<div class="form-group row">
+						<label for="txtInsuranceName">အာမခံ ပုဂ္ဂိုလ်</label>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Insurance Name" id="txtInsuranceName">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="txtFatherName">အဖအမည်</label>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Father Name" id="txtFatherName">
+						</div>
+					</div>
+					<div class="rounded" style="margin: 5px; background-color: white;">
+						<div class="nav-bar">
+							<table class="w-100">
+								<tr id="nav-tr">
+									<td class="text-center w-50 col-form-label off-tab" onclick="showNrc()" id="nrcButton">
+										<i class="fas fa-id-card"></i> NRC
+									</td>
+									<td class="text-center w-50 col-form-label off-tab" onclick="showPassport()"
+										id="passportButton">
+										<i class="fas fa-passport"></i> Passport
+									</td>
+								</tr>
+							</table>
+			
+						</div>
+						<div id="nrcForm" class="round-border" style="display: none; ">
+			
+			
+							<div class="col-sm-12" style="padding: 20px;">
+			
+			
+								<div class="form-group row">
+									<label for="idprefix" class="col-sm-3 col-form-label">ID Prefix</label>
+									<div class="col-sm-9 validDDl">
+										<select class="btn btn-warning btn-sm btn btn-outline-primary  " onchange="prepTown()"
+											style="width: 30%" id="idprefix">
+											<option value="select prefix" selected>Select Prefix</option>
+											<option value="1" >1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>s
+											<option value="14">14</option>
+										</select>
+										<div class="invalid-feedbacks " style="display: none;color:red">
+											Please select valid prefix
+										  </div>
+									</div>
+			
+								</div>
+			
+								<div class="form-group row">
+									<label for="txtNRCTown" class="col-sm-3 col-form-label">Township</label>
+									<div class="col-sm-9">
+										<input type="text" onclick="fireModal();" class="form-control"
+											placeholder="Choose Township..." id="txtNRCTown" readonly
+											style="background-color: white;">
+									</div>
+			
+								</div>
+								<div class="form-group row">
+									<label for="txtSomething" class="col-sm-3 col-form-label">Residence Type</label>
+									<div class="col-sm-9">
+										<select class="btn btn-primary btn-sm dropdown-toggle" style="width: 30%" id="txtSomething">
+											<option value="N" selected>N</option>
+											<option value="P">P</option>
+											<option value="E">E</option>
+										</select>
+									</div>
+			
+								</div>
+								<div class="form-group row">
+									<label for="txtNRCNumber" class="col-sm-3 col-form-label">NRC Number</label>
+									<div class="col-sm-9"><input type="text" class="form-control " id="txtNRCNumber"
+											onkeyup="checkNumber(this);" placeholder="NRC Number"></div>
+			
+								</div>
+							</div>
+						</div>
+			
+						<div id="passportForm" class="round-border" style="display: none;">
+			
+			
+							<div class="col-sm-12" style="padding: 20px;">
+								<div class="form-group row">
+									<label for="txtPassport" class="col-sm-3 col-form-label">Passport Number</label>
+									<div class="col-sm-9"><input type="text" class="form-control float-right" id="txtPassport"
+											placeholder="Passport Number"></div>
+			
+								</div>
+							</div>
+						</div>
+			
+					</div>
+			
+					<br>
+			
+					<div class="form-group row">
+						<label for="txtAddress">နေရပ်လိပ်စာ</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1"><i class="fas fa-map-marker-alt"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Enter Address" id="txtAddress">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="txtContact">ဖုန်နံပါတ်</label>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1"><i class="fas fa-mobile"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Enter Phone" id="txtContact" onkeyup="checkNumber(this);">
+						</div>
+					</div>
+					<div class="form-group row">
+						<button class="btn text-white" style="background-color: #193b6b; margin-bottom: 15%; width: 30%;" onclick="submit()">Continue</button>
+					</div>
+			</form>
+			</div>
+			
+      
+  <br>
+		</div>
+		<!-- Modal -->
+	<div class="modal" tabindex="-1" role="dialog" id="start">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" style="margin: auto;">Select Township</h5>
+				</div>
+				<div class="modal-body text-center">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" id="searchInput" onkeyup="search()"
+							placeholder="Search for Township..">
+					</div>
+					<div class="overflow-auto">
+						<ul id="startList">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end of modal-->
+<!-- <div style="background-color: white; position: fixed; bottom: 0%;" class="w-100">
+  <table style="margin:auto;">
+    <tr>
+      <td><img src="https://i.imgur.com/w6jOYkH.jpg" style="width: 40px;"></td>
+      <td><span style="color: #00aab4;"><b>FIRST NATIONAL INSURANCE</b><br><small>ASSURING PEACE OF MIND, THE ESSENCE OF LIFE</small></span></td>
+    </tr>
+  </table>
+	</div> -->
+	<footer>
+		<table style="margin:auto;">
+			<tr>
+			  <td><img src="https://i.imgur.com/w6jOYkH.jpg" style="width: 40px;"></td>
+			  <td><span style="color: #00aab4;"><b>FIRST NATIONAL INSURANCE</b><br><small>ASSURING PEACE OF MIND, THE ESSENCE OF LIFE</small></span></td>
+			</tr>
+		  </table>
+	</footer>
+  </body>
+  <script type="text/javascript">
+  	function showNrc() {
+      document.getElementById('txtPassport').value = null;
+  		document.getElementById('nrcButton').classList.remove('off-tab');
+  		document.getElementById('nrcButton').classList.add('chosen-tab');
+      document.getElementById('passportButton').classList.add('off-tab');
+  		document.getElementById('passportButton').classList.remove('chosen-tab');
+  		document.getElementById('nrcForm').style.display = "block";
+      document.getElementById('passportForm').style.display = "none";
+  	}
+    
+    function showPassport() {
+      document.getElementById('nrcButton').classList.add('off-tab');
+  		document.getElementById('nrcButton').classList.remove('chosen-tab');
+  		document.getElementById('passportButton').classList.remove('off-tab');
+  		document.getElementById('passportButton').classList.add('chosen-tab');
+  		document.getElementById('passportForm').style.display = "";
+      document.getElementById('nrcForm').style.display = "none";
+  	}
+
+  	showNrc();
+	var statePrefix = {
+
+	1 : [
+	'(BhaMaNa) Bhamo',
+	'(KhaPhaNa) Chipwi',
+	'(TaNaNa) Danai',
+	'(PhaKaNa) Hpakan',
+	'(KhaLaPha) Kawnglanghpu',
+	'(MaKhaBa) Machanbaw',
+	'(MaSaNa) Mansi',
+	'(MaNyaNa) Mohnyin',
+	'(MaMaNa) Momauk',
+	'(MaKaNa) Myitkyina',
+	'(AhGaYa) N Jang Yang',
+	'(NaMaNa) Nawngmun',
+	'(PaTaAh) Puta-O',
+	'(YaKaNa) Shwegu',
+	'(SaBaNa) Sumprabum',
+	'(SaLaNa) Tsawlaw',
+	'(WaMaNa) Waing Maw'
+  	],
+
+  	2 : [
+	'(BaLaKha) Bawlakhe',
+	'(DaMaSa) Demoso',
+	'(PhaSaNa) Hpasawng',
+	'(PhaYaSa) Hpruso',
+	'(LaKaNa) Loikaw',
+	'(MaSaNa) Mese',
+	'(YaTaNa) Shadaw'
+  	],
+
+  	3 : [
+	'(LaBaNa) Hlaingbwe',
+	'(PaKaNa)Hlaingbwe',
+	'(YaYaTha) Hlaingbwe',
+	'(PhaAhNa) Hpa-An',
+	'(KaMaMa) Hpapun',
+	'(KaKaYa) KawKareik',
+	'(KaDaNa) Kyainseikgyi',
+	'(KaSaKa) Kyainseikgyi',
+	'(MaWaTa) Myawaddy',
+	'(SaKaLa) Myawaddy',
+	'(WaLaMa) Myawaddy',
+	'(BaGaLa) Than Daung Gyi',
+	'(LaThaNa) Than Daung Gyi',
+	'(ThaTaNa) Than Daung Gyi',
+	'(Tha TaKa) Than Daung Kyi'
+  	],
+
+  	4 :[
+	'(PhaLaNa) Falam',
+	'(HaKhaNa) Hakha',
+	'(KaPaLa) Kanpetlet',
+	'(MaTaPa) Matupi',
+	'(MaTaNa) Mindat',
+	'(PaLaWa) Paletwa',
+	'(TaTaNa) Tedim',
+	'(HtaTaLa) Thantlang',
+	'(TaZaNa) Tonzang'
+  	],
+
+  	5 : [
+  	'(AhYaTa) Ayadaw',
+	'(BhaMaNa) Banmauk',
+	'(BaTaLa) Chaung-U',
+	'(KhaTaNa) Hkamti',
+	'(HaMaLa) Homalin',
+	'(AhTaNa) Indaw',
+	'(KaLaNa) Kale',
+	'(KaLaHta) Kale',
+	'(KaLaWa) Kalewa',
+	'(KaBaLa) Kanbalu',
+	'(KaNaNa) Kani',
+	'(KaThaNa) Katha',
+	'(KaLaTa) Kawlin',
+	'(HtaPaKha) Lahe',
+	'(LaHaNa) Lahe',
+	'(LaYaNa) Lay Shi',
+	'(MaPaLa) Lay Shi',
+	'(SaMaYa) Lay Shi',
+	'(MaLaNa) Mawlaik',
+	'(MaKaNa) Mingin',
+	'(MaYaNa) Monywa',
+	'(MaMaNa) Myaung',
+	'(DaHaNa) Nanyun',
+	'(NaYaNa) Nanyun',
+	'(PaSaNa) Nanyun',
+	'(PaLaNa) Pale',
+	'(PhaPaNa) Paungbyin',
+	'(PaLaBa) Pinlebu',
+	'(SaKaNa) Sagaing',
+	'(SaLaKa) Salingyi',
+	'(KaMaNa) Shwebo',
+	'(YaBaNa) Shwebo',
+	'(DaPaYa) Tabayin',
+	'(TaMaNa) Tamu',
+	'(MaThaNa) Tamu',
+	'(TaSaNa) Taze',
+	'(HtaKhaNa) Tigyaing',
+	'(WaLaNa) Wetlet',
+	'(WaThaNa) Wuntho',
+	'(YaAuNa) Ye-U',
+	'(YaMaPa) Yinmabin'
+  	],
+
+  	6 : [
+  	'(BaPaNa) Bokpyin',
+	'(HtaWaNa) Dawei',
+	'(KaThaNa) Kawthoung',
+	'(KaSaNa) Kyunsu',
+	'(MaAaNa) Kyunsu',
+	'(LaLaNa) Launglon',
+	'(MaAhYa) Myeik',
+	'(PaLaNa) Palaw',
+	'(TaThaYa) Thanintharyi',
+	'(ThaYaKha) Thayetchaung',
+	'(YaPhaNa) Yebyu'
+  	],
+
+  	7 : [
+  	'(PaKhaNa) Bago',
+	'(DaAuNa) Daik-U',
+	'(KaPaKa) Gyobingauk',
+	'(KaWaNa) Kawa',
+	'KaKaNa) Kyaukkyi',
+	'(KaTaKha) Kyauktaga',
+	'(KaTakKha) Kyauktaga',
+	'(LaPaTa) Letpadan',
+	'(MaLaNa) Minhla',
+	'(MaNyaNa) Monyo',
+	'(NaTaLa) Nattalin',
+	'(NyaLaPa) Nyaung LayPin)',
+	'(AhPhaNa) Okpho',
+	'(AuTaNa) Oktwin',
+	'(PaTaNa) Padaung',
+	'(PaTaTa) Paungde',
+	'(PhaMaNa) Phyu',
+	'(PaMaNa) Pyay',
+	'(YaTaNa) Shwedaung',
+	'(YaKaNa) Shwegyin',
+	'(TaNgaNa) Taungoo',
+	'(HtaTaPa) Taungoo',
+	'(ThaNaPa) Thanatpin',
+	'(ThaWaTa) Thayarwaddy',
+	'(ThaKaNa) Thegon',
+	'(WaMaNa) Waw',
+	'(YaTaYa) Yedashe',
+	'(ZaKaNa) Zingon'
+	],
+
+	8 : [
+	'(AhLaNa) Aunglan',
+	'(MaHtaNa) Aunglan',
+	'(KhaMaNa) Chauk',
+	' (GaGaNa) Gangaw',
+	'(KaMaNa) Kamma',
+	'(MaKaNa) Magway',
+	'(MaBaNa) Minbu',
+	'(MaLaNa) Minhla',
+	'(MaMaNa) Myaing',
+	'(MaThaNa) Myothit',
+	'(NaMaNa) Natmauk',
+	'(NgaPhaNa) Ngape',
+	'(Pakhaka) Pakokku',
+	'(PaMaNa) Pauk',
+	'(PaPhaNa) Pwintbyu',
+	'(SaLaNa) Salin',
+	'(KaHtaNa) Saw',
+	'(KaMaNa) Saw',
+	'(SaPhaNa) Seikphyu',
+	'(SaTaYa) Sidoktaya',
+	'(SaPaWa) Sinbaugwe',
+	'(TaTaKa) Taungdwingyi',
+	'(ThaYaNa) Thayet',
+	'(HtaLaNa) Tilin',
+	'(YaNaKha) Yenangyaung',
+	'(YaSaKa) Yesagyo'
+	],
+
+	9 : [
+	'(AhMaYa) Amarapura',
+	'(AhMaZa) Aungmyaythazan',
+	'(KhaAhZa) Chanmyathazi',
+	'(KaPaTa) Kyaukpadaung',
+	'(KaSaNa) Kyaukse',
+	'(MaTaYa) Madaya',
+	'(MaHaMa) Mahaaungmyay',
+	'(MaLaNa) Mahlaing',
+	'(MaHtaLa) Meiktila',
+	'(MaKaNa) Mogok',
+	'(MaKhaNa) Myingyan',
+	'(MaThaNa) Myittha',
+	'(NaHtaKa) Natogyi',
+	'(NgaZaNa) Ngazun',
+	'(NyaAuNa) Nyaung-U',
+	'(AhKhaNa) Ongyaw (Ohn Chaw)',
+	'(PaThaKa) Patheingyi',
+	'(PaBaNa) Pyawbwe',
+	'(PaKaKha) Pyigyitagon',
+	'(PaAuLa) Pyin Oo Lwin',
+	'(MaMaNa) Pyin Oo Lwin',
+	'(SaKaNa) Sintgaing',
+	'(TaTaAu) Tada-U',
+	'(ThaPaKa) Thabeikkyin',
+	'(ThaSaNa) Thazi',
+	'(WaTaNa) Wundwin',
+	'(YaMaTha) Yamethin',
+	'(DaKhaTha) Dekkhina Thiri',
+	'(LaWaNa) Lewe',
+	'(AuTaTha) Ottara Thiri',
+	'(PaBaTha) Pobba Thiri',
+	'(PaMaNa) Pyinmana',
+	'(TaKaNa) Tatkon',
+	'(ZaBaTha) Zabu Thiri',
+	'(ZaYaTha) Zeya Thiri'
+	],
+
+	10 : [
+	'(BaLaNa) Bilin',
+	'(KhaSaNa) Chaungzon',
+	'(KaHtaNa) Kyaikhto',
+	'(KaMaYa) Kyaikmaraw',
+	'(MaLaMa) Mawlamyine',
+	'(MaDaNa) Mudon',
+	'(PaMaNa) Paung',
+	'(ThaPhaYa) Thanbyuzayat',
+	'(ThaHtaNa) Thaton',
+	'(KhaZaNa) Ye',
+	'(LaMaNa) Ye',
+	'(YaMaNa) Ye'
+	],
+
+	11 : [
+	'(AhMaNa) Ann',
+	'(BaThaTa) Buthidaung',
+	'(GaMaNa) Gwa',
+	'(KaTaLa) Gwa',
+	'(KaPhaNa) Kyaukpyu',
+	'(KaTaNa) Kyaukpyu',
+	'(MaTaNa) Maungsaw',
+	'(TaPaWa) Maungdaw',
+	'(MaAuNa) Mrauk-U',
+	'(MaPaNa) Myebon',
+	'(MaPaNa) Myebon',
+	'(PaTaNa) Pauktaw',
+	'(PaNaKa) Ponnagyun',
+	'(YaBhaNa) Ramree',
+	'(YaThaTa) Rathedaung',
+	'(SaTaNa) Sittwe',
+	'(ThaTaNa) Thandwe',
+	'(MaAhNa) Toungup',
+	'(TaKaNa) Toungup'
+	],
+
+	12 :[
+	'(AhLaNa) Ahlone',
+	'(BhaHaNa) Bahan',
+	'(BhaTaHta) Botahtaung',
+	'(KaKaKa) Cocokyun',
+	'(DaGaSa) Dagon Seikkan',
+	'(DaLaNa) Dala',
+	'(DaPaNa) Dawbon',
+	'(DaGaYa) East Dagon',
+	'(LaMaNa) Hlaing',
+	'(LaThaYa) Hlaingtharya',
+	'(LaKaNa) Hlegu',
+	'(MaBaNa) Hmawbi',
+	'(HtaTaPa) Htantabin',
+	'(AhSaNa) Insein',
+	'(HtKaMaYa) Kamaryut',
+	'(SaKaKha) Kanaungto',
+	'(KaMaNa) Kawhmu',
+	'(KhaYaNa) Kayan',
+	'(KaKhaKa) Kungyangon',
+	'(KaTaTa) Kyauktada',
+	'(KaTaNa) Kyauktan',
+	'(KaMaTa) Kyeemyindaing',
+	'(LaMaTa) Lanmadaw',
+	'(LaThaNa) Latha',
+	'(MaYaKa) Mayangone',
+	'(MaGaDa) Mingaladon',
+	'(MaGaTa) Mingalar Taung Nyunt',
+	'(DaGaMa) North Dagon',
+	'(MaAuKa) North Okkalapa',
+	'(AuKaMa) North Okkalapa',
+	'(PaBaTa) Pebedan',
+	'(PaZaTa) Puzundaung',
+	'(SaKhaNa) San Chaung',
+	'(SaKaNa)Seikkan',
+	'(YaPaTha) Shwepyithar',
+	'(DaGaTa) South Dagon',
+	'12(AuKaTa) South Okkalapa',
+	'(TaAuKa) South Okkalapa',
+	'(TaKaNa) Taik Kyi',
+	'(TaMaNa) Tamwe',
+	'(ThaKaTa) Thaketa',
+	'(ThaLaNa) Thanlyin',
+	'(ThaGaKa) Thingangyun',
+	'(ThaKhaNa) Thongwa',
+	'(TaTaNa) Twantay',
+	'(YaKaNa) Yankin'
+	],
+
+	13 : [
+	'(MaMANa) Aik Chan (Ai Chun)',
+	'(MaPaNa) Ho Tawng ( Ho Tao)',
+	'(HaPaNa) HoPang',
+	'(ThaNaNa) Hseni',
+	'(SaSaNa) Hsihseng',
+	'(ThaPaNa) Hsipaw',
+	'(KaLaNa) Kalaw',
+	'(KaTaNa) Keng Tung',
+	'(KaKaNa) Konkyan',
+	'(MaHtaTa) Konkyan',
+	'(KaHaNa) Kunhing',
+	'(KaKhaNa) Kutkai',
+	'(TaMaNya) Kutkai',
+	'(KaMaNa) Kyaukmae',
+	'(MaNgaNa) Kyaukme',
+	'(MaThaNa) Kyethi',
+	'(LaKhaNa) Laihka',
+	'(HaMaNa) Langkho',
+	'(LaYaNa) Lashio',
+	'(KhaYaHa) Laukkaing',
+	'(LaKaNa) Laukkaing',
+	'(YaSaNa) Lawksawk',
+	'(LaLaNa) Loilen',
+	'(MaBaNa) Mabein',
+	'(MaTaNa) Manton',
+	'(MaKhaTa) Mong Hsat',
+	'(MaSaNa) Mong Hsat',
+	'(MaPhaTa) Mong Hsu',
+	'(MaPhaNa) Monghpyak',
+	'(MaLaNa) Mongla',
+	'(MaNaNa) Mongnai',
+	'(TaTaNa) Mongping',
+	'(PaPaKa) Mongyai',
+	'(MaYaNa) Mongyang',
+	'(MaHaYa) Muse',
+	'(MaKaNa) Muse',
+	'(MaSaNa) Muse',
+	'(WaKaNa) Nam Hkam Wu',
+	'(NaKhaNa) Namhkan',
+	'(NaSaNa) Namhsan',
+	'(NaTaNa) Namit',
+	'(NaPhaNa) Nampan',
+	'(KhaLaNa) Namsang',
+	'(NaMaTa) Namtu',
+	'(NyaYaNa) Nyaungshwe',
+	'(MaKhaNa) Panghsang',
+	'(PaSaNa) Panghsang',
+	'(PaWaNa) Pangwaun',
+	'(PhaKhaNa) Pekon',
+	'(PaTaYa) Pindaya',
+	'(PaLaNa) Pinlaung',
+	'(TaKhaLa) Tachileik',
+	'(TaYaNa) Tangyan',
+	'(TaKaNa) Taunggyi',
+	'(KaTaLa) Taunggyi',
+	'(YaNyaNa) Taunggyi',
+	'(YaNgaNa) Ywangan'
+	],
+
+  	14 : [
+  	'(BaKaLa) Bogale',
+	'(DaNaPha) Danubyu',
+	'(DaDaYa) Dedaye',
+	'(HaThaTa) Hinthada',
+	'(AhGaPa) Ingapu',
+	'(KaKaTa) Kangyidaunt',
+	'(KaLaNa) Kyaiklat',
+	'(KaKhaNa) Kyangin',
+	'(KaKaNa) Kyaunggon',
+	'(KaPaNa) Kyonpyaw',
+	'(LaPaTa) Labutta',
+	'(PaSaLa) Labutta',
+	'(LaMaNa) Lemyethna',
+	'(MaAhBa) Maubin',
+	'(MaMaKa) Mawgyun',
+	'(MaAhNa) Myaung',
+	'(MaMaNa) Myaungmyaa',
+	'(HaKaKa) Ngapudaw',
+	'(NgaPaTa) Ngapudaw',
+	'(NgaYaKa) Ngapudaw',
+	'(NyaTaNa) Nyaungdon',
+	'(PaTaNa) Pantanaw',
+	'(YaThaYa) Pathein',
+	'(PaThaNa) Pathein',
+	'(AhMaNa) Pyapon',
+	'(PhaPaNa) Pyapon',
+	'(ThaPaNa) Thabaung',
+	'(WaKhaMa) Waakema',
+	'(YaKaNa) Yegyi',
+	'(NgaThaKha) Yegyi',
+	'(ZaLaNa) Zalun'
+	]
+	
+	}
+
+	function prepTown() {
+    document.getElementById('txtNRCTown').value = "";
+		var a = document.getElementById('idprefix');
+		var b = a.value;
+		var arrayLoop = [];
+		if(b === '1'){
+			arrayLoop = array1;
+		}
+		if(b === '2'){
+			arrayLoop = array2;
+		}
+		if(b === '3'){
+			arrayLoop = array3;
+		}
+		if(b === '4'){
+			arrayLoop = array4;
+		}
+		if(b === '5'){
+			arrayLoop = array5;
+		}
+		if(b === '6'){
+			arrayLoop = array6;
+		}
+		if(b === '7'){
+			arrayLoop = array7;
+		}
+		if(b === '8'){
+			arrayLoop = array8;
+		}
+		if(b === '9'){
+			arrayLoop = array9;
+		}
+		if(b === '10'){
+			arrayLoop = array10;
+		}
+		if(b === '11'){
+			arrayLoop = array11;
+		}
+		if(b === '12'){
+			arrayLoop = array12;
+		}
+		if(b === '13'){
+			arrayLoop = array13;
+		}
+		if(b === '14'){
+			arrayLoop = array14;
+		}
+    var startList = document.getElementById('startList');
+    var listDetails = startList.childNodes;
+    
+    for (var y = 0; y < listDetails.length; y++){
+      startList.removeChild(listDetails[y]);
+    }
+    
+		for (var i = 0; i < arrayLoop.length; i++){
+			var list = arrayLoop[i];
+			var li = document.createElement("li");
+			li.innerHTML = `<a onclick="txtNRCTown('${list}')" data-dismiss="modal">${list}</a>`;
+			li.value = list;
+			li.datadismiss;
+			startList.appendChild(li);
+		}
+	}
+    prepTown();
+	function txtNRCTown(value) {
+		document.getElementById('txtNRCTown').value = value;
+	}
+    function submit() {
+		
+      var params = window.location.href
+	  
+      params = params.split('/');
+      var paramsIndex = parseInt(params.length) - 1;
+      params = params[paramsIndex];
+      var insurancedName = document.getElementById('txtInsuranceName').value;
+      var fatherName = document.getElementById('txtFatherName').value;
+      var address = document.getElementById('txtAddress').value;
+      var contact = document.getElementById('txtContact').value;
+      var passportNode = document.getElementById('txtPassport')
+      sessionStorage.setItem('insurancedName', insurancedName);
+      sessionStorage.setItem('fatherName', fatherName);
+      sessionStorage.setItem('insurancedAddress', address);
+      sessionStorage.setItem('insurancedContact', contact);
+      if(passportNode.value != ""){
+        sessionStorage.setItem('insurancedIdentifier', passportNode.value);        
+        window.location.assign("https://uatfni.glitch.me/traveldetails/"+params);
+        
+      }else {
+        var idprefix = document.getElementById('idprefix').value;
+        var txtNRCTown = document.getElementById('txtNRCTown').value;
+        txtNRCTown = txtNRCTown.split(' ');
+        txtNRCTown = txtNRCTown[0];
+        txtNRCTown = txtNRCTown.substring(1, txtNRCTown.length);
+        txtNRCTown = txtNRCTown.substring(0, txtNRCTown.length-1);
+        var txtNRCNumber = document.getElementById('txtNRCNumber').value;
+        var txtSomething = document.getElementById('txtSomething').value;
+        var NRCNumber = `${idprefix}/${txtNRCTown}(${txtSomething})${txtNRCNumber}`
+        sessionStorage.setItem('insurancedIdentifier', NRCNumber);
+        window.location.assign("https://uatfni.glitch.me/traveldetails/"+params);
+      }
+    }
+    // function checkPhone() {
+    //   var input = document.getElementById('txtContact').value;
+    //   if(isNaN(input)){
+    //     document.getElementById('txtContact').value = input.substring(0, input.length-1);
+    //   }
+    // }
+    // function checkNRC() {
+    //   var input = document.getElementById('txtNRCNumber').value;
+    //   if(isNaN(input)){
+    //     document.getElementById('txtNRCNumber').value = input.substring(0, input.length-1);
+    //   }
+    // }
+	function fireModal(){
+		var ddlPrefix = document.getElementById('idprefix').value;
+		
+		if(ddlPrefix == "select prefix"){
+			alert('plase choose ID prefix,plase');
+			$('#idprefix').focus();
+			$('div .invalid-feedbacks').css('display','block');
+
+		}else{
+			$('#start').modal('show');
+		}
+	}
+	$('#idprefix').change(function(){
+		if($(this).val() != 'select prefix'){
+			$('div .invalid-feedbacks').css('display','none');
+			var selectedPrefix = $(this).val();
+			var listedCity = statePrefix[selectedPrefix] ;
+			var reslut = $.map(listedCity, function(val){
+				return `<li><a onclick="txtNRCTown('${val}')" data-dismiss="modal">${val}</a></li>`;
+			}).join(' ');
+
+			//alert(reslut);
+			$('#startList').empty();
+			$('#startList').append(reslut);
+
+		}
+		
+	})
+	function checkNumber(inputId){
+		
+		var input = document.getElementById(inputId.id).value;
+	
+		if(isNaN(input)){
+			document.getElementById(inputId.id).value = input.substring(0,input.length -1);
+			alert('enter only number');
+		}
+	}
+	function search() {
+		  var input, filter, ul, li, a, i, txtValue;
+		  filter = document.getElementById('searchInput').value.toUpperCase();
+		 
+		  li = document.querySelectorAll('ul li');
+		 
+	  // Loop through all list items, and hide those who don't match the search query
+	  for (i = 0; i < li.length; i++) {
+	    a = li[i].getElementsByTagName("a")[0];
+	    txtValue = a.textContent || a.innerText;
+	    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	      li[i].style.display = "";
+	    } else {
+	      li[i].style.display = "none";
+	    }
+	  }
+	}
+  </script>
+</html>

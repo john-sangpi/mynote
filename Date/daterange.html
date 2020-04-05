@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <style>
+        /* .drp-calendar.right thead>tr:nth-child(2) {
+            display: none;
+        }
+
+        .drp-calendar.right tbody {
+            display: none;
+        }
+
+        .daterangepicker.ltr .ranges,
+        .daterangepicker.ltr .drp-calendar {
+            float: none !important;
+        }
+
+        .daterangepicker .drp-calendar.right .daterangepicker_input {
+            position: absolute;
+            top: 45px;
+            left: 8px;
+            width: 230px;
+        }
+
+        .drp-calendar.left .drp-calendar-table {
+            margin-top: 45px;
+        } */
+
+        .daterangepicker .drp-calendar.right {
+            position: absolute !important;
+            right: 0 !important;
+            top: 0 !important;
+        }
+
+        .daterangepicker .drp-calendar.right tbody {
+            display: none !important;
+        }
+
+        .daterangepicker .drp-calendar.right thead>tr:nth-child(2) {
+            display: none !important;
+        }
+
+        .daterangepicker .drp-calendar.right th.month {
+            display: none !important;
+        }
+
+        .daterangepicker .drp-calendar.right .calendar-table {
+            background: transparent !important;
+        }
+
+        .daterangepicker .daterangepicker.ltr .ranges,
+        .daterangepicker.ltr .drp-calendar {
+            float: none !important;
+        }
+
+        .daterangepicker .drp-calendar.right .daterangepicker_input {
+            position: absolute !important;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="reportrange"
+        style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 30%">
+        <i class="fa fa-calendar"></i>&nbsp;
+        <span></span> <i class="fa fa-caret-down"></i>
+    </div>
+
+    <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+    <input type="text" name="end" value="01/01/2018 - 01/15/2018" />
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+
+            }, cb);
+
+            cb(start, end);
+            // starting 
+
+
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left',
+                singleDatePicker: true,
+                maxDate: function () {
+                    return $('input[name="end"]').val();
+                }
+            }, function (start, end, label) {
+
+                $('input[name="end"]').data('daterangepicker').setStartDate(start);
+          
+                //alert($('input[name="end"]').val())
+                $('input[name="daterange"]').data('daterangepicker').setStartDate(start);
+                $('input[name="daterange"]').data('daterangepicker').setEndDate($('input[name="end"]').val() != ' '?$('input[name="end"]').val() : null );
+                //$('input[name="end"]').daterangepicker({ startDate: start, minDate: start });
+
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            }).data('daterangepicker');
+            $('input[name="end"]').daterangepicker({
+                opens: 'left',
+                singleDatePicker: true,
+                minDate: function () {
+                    return $('input[name="daterange"]').val();
+                }
+            }, function (start, end, label) {
+                $('input[name="daterange"]').data('daterangepicker').setEndDate(start);
+
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            }).data('daterangepicker');
+
+        });
+    </script>
+</body>
+
+</html>

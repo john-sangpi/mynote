@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var array = [1,2,45,100,200];
+        var afterMap = array.map((item,num)=>item + num )
+      
+        var afterFiler = array.filter(function(item){
+            return item >100
+        })
+        var afterReduce = array.reduce(function(prev,cur){
+            return prev+cur;
+        },1);
+        var afterSome = array.every(function(item){
+            return item>100
+        })
+        var afterFind = array.find(function(item){
+            return item === 200
+        })
+        var afterFindIndex = array.findIndex(item=> item===200);
+        
+        console.log(afterFindIndex);
+        var myarray = array.sort(function(a,b){
+            return a < b;
+        }).join(' ');
+        console.log(myarray);
+    </script>
+</body>
+</html>

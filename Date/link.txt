@@ -1,0 +1,5 @@
+https://www.youtube.com/watch?v=ub-vK97VOhE
+https://www.malot.fr/bootstrap-datetimepicker/
+https://www.daterangepicker.com/
+https://gijgo.com/datepicker/example/daterangepicker
+https://stackoverflow.com/questions/25117519/how-to-create-a-daterange-in-two-text-boxes-in-jquery-datepicker

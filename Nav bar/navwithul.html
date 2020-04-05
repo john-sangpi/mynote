@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            display: flex;
+            margin: 0px;
+            padding: 0px;
+            transform: translate(-50%,50%);
+        }
+        ul li{
+            list-style-type: none;
+        }
+        ul li a{
+            text-decoration: none;
+            color:#262626;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 10px;
+            /* position: relative;
+            display: block; */
+            
+        }
+        ul li.active a{
+            background: #262626;
+            color:#fff;
+        }
+        .hovercss{
+            background-color:red;
+            color:green;
+           
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Service</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Help</a></li>
+    </ul>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <script>
+       $(document).on('click','ul li',function(){
+		console.log($(this));
+            $(this).addClass('active').siblings().removeClass('active');
+       })
+    //    $('ul li a').on('mouseover mouseout', function(event){
+    //        if(event.type =='mouseover'){
+    //             $(this).addClass('hovercss');
+    //        }else{
+    //             $(this).removeClass('hovercss');
+    //        }
+          
+    //    })
+    $('ul li').on({
+        mouseover:function(){
+            $(this).addClass('hovercss');
+        },
+        mouseout: function(){ 
+            $(this).removeClass('hovercss'); 
+        }
+    },'a');// event bubbling a dosn't have event handler but it fired by his parent ul li.
+  
+
+
+    </script>
+</body>
+
+</html>
+<!--
+/// 3 way biding event handler 
+// 1. shorthand 2. on with type 3. on wiht object 
+//// shorthnad is callling on method in the behind the scene 
+// passing data to event handler:- .on( events [, selector ] [, data ], handler )
+// how handler function will accept the data. bz handler is automatically received event object
+/// from that object, data attribute has 
+
+
+-->

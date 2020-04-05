@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/favicon.icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./src/nav.css">
+    <title>Nav Bar Demo</title>
+</head>
+<body>
+
+    <a href="#" class="nav_link">
+        <i class="material-icons nav_icon">dashboard</i>
+        <span class="nav_text">Dashboard</span>
+    </a>
+    <nav class="nav">
+        <a href="#" class="nav_link">
+            <i class="material-icons nav_icon">dashboard</i>
+            <span class="nav_text">Dashboard</span>
+        </a>
+        <a href="#" class="nav_link nav_link_active">
+            <i class="material-icons nav_icon">person</i>
+            <span class="nav_text">Profile</span>
+          </a>
+          <a href="#" class="nav_link">
+            <i class="material-icons nav_icon">devices</i>
+            <span class="nav_text">Devices</span>
+          </a>
+          <a href="#" class="nav_link">
+            <i class="material-icons nav_icon">lock</i>
+            <span class="nav_text">Privacy</span>
+          </a>
+          <a href="#" class="nav_link">
+            <i class="material-icons nav_icon">settings</i>
+            <span class="nav_text">Settings</span>
+          </a>
+          <div class="animation start-home"></div>
+
+    </nav>
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.js"
+			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+              crossorigin="anonymous"></script>
+    <script>
+        // $(document).on('click','nav a',function(){
+        //     $(this).addClass('nav_link_active').siblings().removeClass('nav_link_active');
+        // });
+        $('nav a').click(function(){
+          $(this).addClass('nav_link_active').siblings().removeClass('nav_link_active');
+        });
+
+    </script>
+</body>
+</html>

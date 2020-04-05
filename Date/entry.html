@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" >
+    <script src="https://kit.fontawesome.com/1b8a27bdd5.js" crossorigin="anonymous"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <style>
+        @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+        .shadow {
+            box-shadow: 6px 6px 3px 6px #da2828;
+            border-radius: 20px;
+        }
+
+        .form-margin {
+            margin: 5px;
+            margin-top: 10px;
+        }
+        .innerPadding{
+            
+            padding: 10px;
+        }
+    </style>
+    <title>Blife </title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="d-flex align-item-center justify-content-center mt-5">
+            <div class="shadow innerPadding" >
+
+                <form action="" method="POST" novalidate class="form-margin fmUserInfo">
+                    <div class="form-group row">
+                        <label for="txtName" class="col-sm-4 col-form-label">Name</label>
+                        <div class="input-group col-sm-8">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fas fa-id-card-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" required
+                                id="txtName">
+                            <div class="invalid-feedback">Please enter name</div>
+                        </div>
+                    </div>
+                
+                    <div class="form-group row">
+                        <label for="txtAddress" class="col-sm-4 col-form-label">Address</label>
+                        <div class="input-group col-sm-8">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-address-book" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Address" required
+                                id="txtAddress">
+                            <div class="invalid-feedback">Please fill Address</div>
+                        </div>
+                    </div>
+                
+                      <fieldset class="form-group" >
+                        <div class="row">
+                          <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
+                          <div class="col-sm-8">
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="rbrGender" id="rbrMale" value="male" checked>
+                              <label class="form-check-label" for="rbrMale">
+                                Male
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="rbrGender" id="rbrFemale" value="female">
+                              <label class="form-check-label" for="rbrFemale">
+                                Female
+                              </label>
+                            </div>
+                          
+                          </div>
+                        </div>
+                      </fieldset>
+                    <div class="form-group row">
+                        <label for="txtDOB" class="col-sm-4 col-form-label">Date of Birth</label>
+                        <div class="input-group col-sm-8">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Date of Birth" required
+                                id="txtDOB">
+                            <div class="invalid-feedback">Please fillup this field</div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtTime" class="col-sm-4 col-form-label">Choose Time</label>
+                        <div class="input-group col-sm-8">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-clock"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Time" required
+                                id="txtTime">
+                            <div class="invalid-feedback">Please fillup this field</div>
+                        </div>
+                    </div>
+                    <div class="form-group row " >
+                        <label class="col-sm-4 col-form-label" for="txtAreAddress">Address</label>
+                        <div class="input-group col-sm-8">
+                            <textarea class="form-control rounded-1" id="txtAreAddress" required
+                                rows="3"></textarea>
+                            <div class="invalid-feedback">Please fill the address </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtStart" class="col-sm-4 col-form-label">From</label>
+                        <div class="input-group col-sm-8">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="start date" required
+                                id="txtStart">
+                            <div class="invalid-feedback">Please fillup this field</div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtEnd" class="col-sm-4 col-form-label">To</label>
+                        <div class="input-group col-sm-8">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="end date" required
+                                id="txtEnd">
+                            <div class="invalid-feedback">Please fillup this field</div>
+                        </div>
+                    </div>
+
+                   
+
+                        <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+     <!--test from boostrap code-->
+     <div class="container">
+        <div class='col-md-5'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker6'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-5'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker7'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- https://eonasdan.github.io/bootstrap-datetimepicker/-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+        <script>
+            $( function() {
+              $("#txtDOB").datetimepicker({
+                  timepicker:false,
+                  datepicker:true,
+                  format:'d-m-Y',
+                  disableWeekDays:[5,6]
+              });
+
+              $("#txtStart").datetimepicker({
+                  //timepicker:true,
+                  datepicker:true,
+                  format:'d-m-Y H:i',
+                  onShow:function(ct){
+                      this.setOptions({
+                          maxDate: $('#txtEnd').val() ? $('#txtEnd').val() :false
+                      })
+                  }
+              });
+
+              $("#txtEnd").datetimepicker({
+                  //timepicker:true,
+                  datepicker:true,
+                  format:'d-m-Y H:i',
+                  onShow:function(ct){
+                      this.setOptions({
+                          minDate: $('#txtStart').val()? $('#txtStart').val() :false
+                      })
+                  }
+              });
+
+              $('#txtTime').datetimepicker({
+                  timepicker: true,
+                  datepicker:false,
+                  format: 'H:i',
+                  value:'09:45',
+                  hours12:true,
+                  step:5
+              })
+
+              var forms = document.getElementsByClassName('fmUserInfo');
+            // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                        } else {
+
+                            // we can perfom db inserting or ajax 
+                        }
+                        form.classList.add('was-validated');
+
+                    }, false);
+                });
+
+             
+                $('#datetimepicker6').datetimepicker();
+                $('#datetimepicker7').datetimepicker({
+                    useCurrent: false //Important! See issue #1075
+                });
+                $("#datetimepicker6").on("dp.change", function (e) {
+                    $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                });
+                $("#datetimepicker7").on("dp.change", function (e) {
+                    $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                });
+       
+			
+            } );
+        </script>
+</body>
+
+</html>
